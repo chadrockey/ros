@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(roslib)
-find_package(catkin REQUIRED COMPONENTS rospack)
+find_package(catkin REQUIRED COMPONENTS)
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES roslib
@@ -29,8 +29,6 @@ if(CMAKE_HOST_UNIX)
 else()
   catkin_add_env_hooks(10.ros SHELLS bat DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/env-hooks)
 endif()
-
-catkin_python_setup()
 
 install(TARGETS roslib
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
