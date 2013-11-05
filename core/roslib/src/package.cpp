@@ -26,7 +26,6 @@
  */
 
 #include "ros/package.h"
-#include "rospack/rospack.h"
 
 #include <cstdio>
 #include <iostream>
@@ -47,24 +46,6 @@ static boost::mutex librospack_mutex;
 std::string command(const std::string& _cmd)
 {
   boost::mutex::scoped_lock lock(librospack_mutex);
-
-  rospack::ROSPack rp;
-  int ret;
-  try
-  {
-    ret = rp.run(_cmd);
-    if(ret == 0)
-      return rp.getOutput();
-    else {
-      if ( !rp.is_quiet() )
-	std::cerr << "ROSPack::run returned non-zero." << std::endl;
-    }
-  }
-  catch(std::runtime_error &e)
-  {
-    if ( !rp.is_quiet() )
-      std::cerr << "[rospack] " << e.what() << std::endl;
-  }
   return std::string("");
 }
 
